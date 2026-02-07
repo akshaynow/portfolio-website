@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: white;
+  color: #0f172a;
+}
+
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 12%;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #334155;
+}
+
+/* HERO */
+header {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SECTIONS */
+section {
+  padding: 80px 12%;
+}
+
+.skill-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.skill-list span {
+  padding: 8px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+}
+
+.project {
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+footer {
+  padding: 20px;
+  text-align: center;
+  background: #f8fafc;
+}
