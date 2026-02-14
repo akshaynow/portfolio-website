@@ -1,67 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Akshay Mohanan | Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<title>Akshay Mohanan | IT Infrastructure Specialist</title>
+
+<meta name="description" content="Akshay Mohanan - IT Infrastructure & Network Specialist Portfolio">
+<meta property="og:title" content="Akshay Mohanan Portfolio">
+<meta property="og:description" content="7+ years IT Infrastructure & Network Specialist">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
 
+<div class="loader" id="loader"></div>
+<div class="progress"></div>
+
 <nav class="navbar">
-  <div class="logo">akshaynow.in</div>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-  </ul>
+<div class="logo">akshaynow.in</div>
+
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#projects">Projects</a></li>
+</ul>
+
+<button class="theme-toggle" id="themeToggle">🌙</button>
 </nav>
 
-<header id="home">
-  <h1 data-aos="fade-down">Akshay Mohanan</h1>
-  <p data-aos="fade-up">IT • Networking • Systems</p>
+<header id="home" class="hero">
+<div class="hero-inner">
+
+<div class="hero-photo">
+<img src="profile.jpg" id="profileBtn">
+</div>
+
+<div class="hero-text">
+<h1>Akshay Mohanan</h1>
+<p class="role"><span class="role-text">IT Infrastructure Specialist</span></p>
+
+<button class="btn" id="resumeBtn">View Resume</button>
+
+<div class="socials">
+<a href="https://www.linkedin.com/in/akshaymohanan"><i class="fab fa-linkedin"></i></a>
+<a href="https://github.com/akshaynow"><i class="fab fa-github"></i></a>
+<a href="https://twitter.com/akshaynow"><i class="fab fa-twitter"></i></a>
+<a href="https://instagram.com/akshaynow"><i class="fab fa-instagram"></i></a>
+</div>
+
+</div>
+</div>
 </header>
 
-<section id="about" class="about" data-aos="fade-right">
-  <h2>About Me</h2>
-  <p>
-    I am an IT professional with experience in networking,
-    infrastructure, system administration, and automation.
-  </p>
+<section id="about" class="reveal">
+<h2>About Me</h2>
+<p>
+IT professional with <b>7+ years</b> experience in enterprise infrastructure,
+network administration, troubleshooting, and deployment.
+Focused on stability, security, and scalable IT systems.
+</p>
 </section>
 
-<section id="skills" class="skills">
-  <h2 data-aos="zoom-in">Skills</h2>
-  <div class="skill-list">
-    <span>Networking</span>
-    <span>Switching & Routing</span>
-    <span>Linux</span>
-    <span>Automation</span>
-  </div>
+<section id="experience" class="reveal">
+<h2>Experience</h2>
+
+<div class="timeline">
+<div class="timeline-item">
+<h3>Senior IT Support / Network Admin</h3>
+<span>2021 – Present</span>
+<p>Managing enterprise infrastructure, monitoring, servers, switches and deployments.</p>
+</div>
+
+<div class="timeline-item">
+<h3>IT Support Engineer</h3>
+<span>2018 – 2021</span>
+<p>Handled network troubleshooting, user support and rollout projects.</p>
+</div>
+
+<div class="timeline-item">
+<h3>Junior IT Technician</h3>
+<span>2016 – 2018</span>
+<p>System setup, LAN configuration and maintenance.</p>
+</div>
+</div>
+
 </section>
 
-<section id="projects" class="projects">
-  <h2 data-aos="zoom-in">Projects</h2>
+<section id="projects" class="reveal">
+<h2>Projects</h2>
 
-  <div class="project" data-aos="fade-up">
-    <h3>Enterprise Network Setup</h3>
-    <p>Design and deployment of office network infrastructure.</p>
-  </div>
+<div class="project">
+<h3>Enterprise Network Deployment</h3>
+<p>Designed and deployed structured enterprise network environment.</p>
+</div>
 
-  <div class="project" data-aos="fade-up">
-    <h3>Monitoring & Alerts</h3>
-    <p>System monitoring and alert automation.</p>
-  </div>
+<div class="project">
+<h3>Monitoring Automation</h3>
+<p>Implemented automated alerting improving uptime visibility.</p>
+</div>
+
 </section>
 
-<footer data-aos="fade-up">
-  © 2026 akshaynow.in
+<footer>
+© 2026 akshaynow.in
 </footer>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<!-- PHOTO -->
+<div class="modal" id="photoModal">
+<img src="profile.jpg">
+</div>
+
+<!-- RESUME -->
+<div class="modal" id="resumeModal">
+<iframe src="resume.pdf"></iframe>
+</div>
+
+<!-- CONTACT FLOAT -->
+<a href="mailto:akshaynow@gmail.com" class="contact-float">
+<i class="fas fa-envelope"></i>
+</a>
+
 <script src="script.js"></script>
+
 </body>
 </html>
