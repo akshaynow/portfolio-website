@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshay Mohanan | Portfolio</title>
 
-<title>Akshay Mohanan | IT Infrastructure Specialist</title>
-
-<link rel="icon" type="image/png" href="favicon.png">
-
+<link rel="icon" href="favicon.png">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-
 <div class="progress"></div>
 
+<!-- NAV -->
 <nav class="navbar">
 <div class="logo">akshaynow.in</div>
 
@@ -28,10 +27,12 @@
 <li><a href="#projects">Projects</a></li>
 </ul>
 
-<button class="theme-toggle" id="themeToggle">🌓</button>
+<button id="themeToggle">🌓</button>
 </nav>
 
+<!-- HERO -->
 <header id="home" class="hero">
+
 <div class="hero-inner">
 
 <div class="hero-photo">
@@ -41,7 +42,8 @@
 <div class="hero-text">
 <h1>Akshay Mohanan</h1>
 <p class="role"><span class="role-text">IT Infrastructure Specialist</span></p>
-<button class="btn" id="resumeBtn">View Resume</button>
+
+<button id="resumeBtn" class="btn">View Resume</button>
 
 <div class="socials">
 <a href="https://www.linkedin.com/in/akshaymohanan"><i class="fab fa-linkedin"></i></a>
@@ -49,20 +51,25 @@
 <a href="https://twitter.com/akshaynow"><i class="fab fa-twitter"></i></a>
 <a href="https://instagram.com/akshaynow"><i class="fab fa-instagram"></i></a>
 </div>
+
 </div>
 
 </div>
+
 </header>
 
+<!-- ABOUT -->
 <section id="about" class="reveal">
 <h2>About Me</h2>
+
 <div class="experience-badge">7+ Years Experience</div>
 
 <p>
 Experienced IT professional specializing in enterprise infrastructure,
-network administration, troubleshooting, deployments, and user support.
-Focused on maintaining stable, secure and scalable IT environments.
+network administration, troubleshooting, deployments, and support.
+Focused on stable, secure, scalable IT environments.
 </p>
+
 </section>
 
 <!-- SKILLS -->
@@ -70,27 +77,23 @@ Focused on maintaining stable, secure and scalable IT environments.
 <h2>Skills</h2>
 
 <div class="skill">
-<span>Networking</span>
+Networking
 <div class="bar"><div style="width:90%"></div></div>
 </div>
 
 <div class="skill">
-<span>Infrastructure Management</span>
+Infrastructure
 <div class="bar"><div style="width:85%"></div></div>
 </div>
 
 <div class="skill">
-<span>System Administration</span>
-<div class="bar"><div style="width:80%"></div></div>
-</div>
-
-<div class="skill">
-<span>Troubleshooting</span>
+Troubleshooting
 <div class="bar"><div style="width:95%"></div></div>
 </div>
 
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience" class="reveal">
 <h2>Experience</h2>
 
@@ -99,34 +102,52 @@ Focused on maintaining stable, secure and scalable IT environments.
 <div class="timeline-item">
 <h3>Senior IT Support / Network Admin</h3>
 <span>2021 – Present</span>
-<p>Managing enterprise infrastructure, servers, monitoring and deployments.</p>
+<p>Managing enterprise infrastructure and deployments.</p>
 </div>
 
 <div class="timeline-item">
 <h3>IT Support Engineer</h3>
 <span>2018 – 2021</span>
-<p>Handled networking, troubleshooting and rollout projects.</p>
+<p>Handled networking and troubleshooting.</p>
 </div>
 
 <div class="timeline-item">
 <h3>Junior IT Technician</h3>
 <span>2016 – 2018</span>
-<p>System setup, LAN configuration and maintenance.</p>
+<p>System setup and LAN configuration.</p>
 </div>
 
 </div>
+
 </section>
 
+<!-- PROJECTS -->
 <section id="projects" class="reveal">
 <h2>Projects</h2>
 
 <div class="project">
 <h3>Enterprise Network Deployment</h3>
-<p>Designed and deployed structured enterprise network.</p>
+<p>Designed structured corporate network.</p>
 </div>
 
 <div class="project">
 <h3>Monitoring Automation</h3>
-<p>Implemented automated alerting improving uptime visibility.</p>
-</div
+<p>Implemented automated alerts.</p>
+</div>
 
+</section>
+
+<footer>© 2026 akshaynow.in</footer>
+
+<!-- MODALS -->
+<div class="modal" id="photoModal"><img src="profile.jpg"></div>
+<div class="modal" id="resumeModal"><iframe src="resume.pdf"></iframe></div>
+
+<a href="mailto:yourmail@email.com" class="contact-float">
+<i class="fas fa-envelope"></i>
+</a>
+
+<script src="script.js"></script>
+
+</body>
+</html>
