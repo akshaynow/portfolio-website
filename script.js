@@ -1,6 +1,17 @@
 /* LOADER */
-window.onload=()=>{
-document.getElementById("loader").style.display="none";
+window.onload=()=>document.getElementById("loader").style.display="none";
+
+/* DARK DEFAULT */
+const toggle=document.getElementById("themeToggle");
+if(localStorage.getItem("theme")==="light"){
+document.body.classList.remove("dark");
+}else{
+document.body.classList.add("dark");
+}
+toggle.onclick=()=>{
+document.body.classList.toggle("dark");
+localStorage.setItem("theme",
+document.body.classList.contains("dark")?"dark":"light");
 };
 
 /* ROLE ROTATE */
@@ -23,7 +34,7 @@ photoModal.onclick=()=>photoModal.classList.remove("show");
 resumeBtn.onclick=()=>resumeModal.classList.add("show");
 resumeModal.onclick=()=>resumeModal.classList.remove("show");
 
-/* SCROLL PROGRESS */
+/* PROGRESS */
 window.addEventListener("scroll",()=>{
 const s=document.documentElement.scrollTop;
 const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
@@ -38,13 +49,3 @@ el.classList.add("visible");
 }
 });
 });
-
-/* DARK MODE */
-const toggle=document.getElementById("themeToggle");
-toggle.onclick=()=>{
-document.body.classList.toggle("dark");
-localStorage.setItem("theme",document.body.classList.contains("dark"));
-};
-if(localStorage.getItem("theme")==="true"){
-document.body.classList.add("dark");
-}
