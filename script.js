@@ -1,18 +1,11 @@
 /* =========================
-   SAFE LOADER (never stuck)
+   RUN AFTER PAGE READY
 ========================= */
 
-window.addEventListener("load", hideLoader);
-setTimeout(hideLoader, 2500); // fallback if load blocked
-
-function hideLoader(){
-const loader=document.getElementById("loader");
-if(loader){loader.style.display="none";}
-}
-
+document.addEventListener("DOMContentLoaded", function(){
 
 /* =========================
-   DARK MODE DEFAULT
+   DARK MODE DEFAULT (FIRST)
 ========================= */
 
 const toggle=document.getElementById("themeToggle");
@@ -26,7 +19,6 @@ document.body.classList.add("dark");
 if(toggle){
 toggle.onclick=()=>{
 document.body.classList.toggle("dark");
-
 localStorage.setItem(
 "theme",
 document.body.classList.contains("dark")?"dark":"light"
@@ -36,7 +28,7 @@ document.body.classList.contains("dark")?"dark":"light"
 
 
 /* =========================
-   ROLE TEXT ROTATION
+   ROLE ROTATION
 ========================= */
 
 const roleText=document.querySelector(".role-text");
@@ -87,8 +79,9 @@ resumeModal.onclick=()=>resumeModal.classList.remove("show");
    SCROLL PROGRESS BAR
 ========================= */
 
-window.addEventListener("scroll",()=>{
 const progress=document.querySelector(".progress");
+
+window.addEventListener("scroll",()=>{
 if(!progress) return;
 
 const scrollTop=document.documentElement.scrollTop;
@@ -99,13 +92,21 @@ progress.style.width=(scrollTop/height)*100+"%";
 
 
 /* =========================
-   REVEAL ANIMATION
+   REVEAL ANIMATION (FIXED)
 ========================= */
 
-window.addEventListener("scroll",()=>{
-document.querySelectorAll(".reveal").forEach(el=>{
-if(el.getBoundingClientRect().top < window.innerHeight-100){
+const reveals=document.querySelectorAll(".reveal");
+
+function revealNow(){
+reveals.forEach(el=>{
+if(el.getBoundingClientRect().top < window.innerHeight-80){
 el.classList.add("visible");
 }
 });
+}
+
+window.addEventListener("scroll",revealNow);
+revealNow(); // IMPORTANT: run once on page load
+
+
 });
