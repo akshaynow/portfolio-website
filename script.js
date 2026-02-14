@@ -1,5 +1,8 @@
-/* LOADER */
-window.onload=()=>document.getElementById("loader").style.display="none";
+/* SAFE LOADER */
+window.addEventListener("load",()=>{
+const loader=document.getElementById("loader");
+if(loader){loader.style.display="none";}
+});
 
 /* DARK DEFAULT */
 const toggle=document.getElementById("themeToggle");
@@ -8,13 +11,17 @@ document.body.classList.remove("dark");
 }else{
 document.body.classList.add("dark");
 }
+if(toggle){
 toggle.onclick=()=>{
 document.body.classList.toggle("dark");
 localStorage.setItem("theme",
 document.body.classList.contains("dark")?"dark":"light");
 };
+}
 
 /* ROLE ROTATE */
+const roleText=document.querySelector(".role-text");
+if(roleText){
 const roles=[
 "IT Infrastructure Specialist",
 "Network Administrator",
@@ -23,26 +30,38 @@ const roles=[
 let i=0;
 setInterval(()=>{
 i=(i+1)%roles.length;
-document.querySelector(".role-text").textContent=roles[i];
+roleText.textContent=roles[i];
 },2600);
+}
 
-/* PHOTO */
+/* PHOTO POPUP */
+const profileBtn=document.getElementById("profileBtn");
+const photoModal=document.getElementById("photoModal");
+if(profileBtn && photoModal){
 profileBtn.onclick=()=>photoModal.classList.add("show");
 photoModal.onclick=()=>photoModal.classList.remove("show");
+}
 
-/* RESUME */
+/* RESUME POPUP */
+const resumeBtn=document.getElementById("resumeBtn");
+const resumeModal=document.getElementById("resumeModal");
+if(resumeBtn && resumeModal){
 resumeBtn.onclick=()=>resumeModal.classList.add("show");
 resumeModal.onclick=()=>resumeModal.classList.remove("show");
+}
 
-/* PROGRESS */
+/* SCROLL PROGRESS */
 window.addEventListener("scroll",()=>{
+const progress=document.querySelector(".progress");
+if(progress){
 const s=document.documentElement.scrollTop;
 const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-document.querySelector(".progress").style.width=(s/h)*100+"%";
+progress.style.width=(s/h)*100+"%";
+}
 });
 
 /* REVEAL */
-document.addEventListener("scroll",()=>{
+window.addEventListener("scroll",()=>{
 document.querySelectorAll(".reveal").forEach(el=>{
 if(el.getBoundingClientRect().top<window.innerHeight-100){
 el.classList.add("visible");
