@@ -1,26 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================
-       LIGHT MODE DEFAULT
+       CURRENT YEAR
+    ========================= */
+
+    const yearElement = document.getElementById("year");
+
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+
+
+    /* =========================
+       THEME TOGGLE
     ========================= */
 
     const themeToggle = document.getElementById("themeToggle");
 
-    // Website always opens in light mode
-    document.body.classList.remove("dark");
-
     if (themeToggle) {
-        themeToggle.addEventListener("click", () => {
-            document.body.classList.toggle("dark");
+
+        themeToggle.addEventListener("click", function () {
+
+            document.body.classList.toggle("dark-mode");
 
             const icon = themeToggle.querySelector("i");
 
-            if (document.body.classList.contains("dark")) {
-                icon.className = "fa-solid fa-sun";
-            } else {
-                icon.className = "fa-solid fa-moon";
+            if (icon) {
+
+                if (document.body.classList.contains("dark-mode")) {
+                    icon.className = "fa-solid fa-sun";
+                } else {
+                    icon.className = "fa-solid fa-moon";
+                }
+
             }
+
         });
+
     }
 
 
@@ -30,18 +46,182 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const menuToggle = document.getElementById("menuToggle");
     const navMenu = document.getElementById("navMenu");
-    const navLinks = document.querySelectorAll(".nav-link");
 
     if (menuToggle && navMenu) {
 
-        menuToggle.addEventListener("click", () => {
-            navMenu.classList.toggle("open");
+        menuToggle.addEventListener("click", function () {
+
+            menuToggle.classList.toggle("active");
+            navMenu.classList.toggle("active");
+
         });
 
-        navLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-                navMenu.classList.remove("open");
-            });
+    }
+
+
+    /* =========================
+       SMOOTH SCROLL
+    ========================= */
+
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+    anchorLinks.forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            const targetId = this.getAttribute("href");
+
+            if (!targetId || targetId === "#") {
+                return;
+            }
+
+            const target = document.querySelector(targetId);
+
+            if (target) {
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                // Update URL without causing a page reload
+                history.replaceState(null, null, targetId);
+
+            }
+
+
+            // Close mobile menu after clicking
+            if (navMenu && menuToggle) {
+
+                navMenu.classList.remove("active");
+                menuToggle.classList.remove("active");
+
+            }
+
+        });
+
+    });
+
+
+    /* =========================
+       NAVIGATION ACTIVE LINK
+    ========================= */
+
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    function updateActiveNav() {
+
+        let currentSection = "";
+
+        sections.forEach(function (section) {
+
+            const sectionTop = section.offsetTop - 180;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY < sectionTop + sectionHeight
+            ) {
+                currentSection = section.getAttribute("id");
+            }
+
+        });
+
+
+        navLinks.forEach(function (link) {
+
+            link.classList.remove("active");
+
+            if (
+                link.getAttribute("href") === "#" + currentSection
+            ) {
+                link.classList.add("active");
+            }
+
+        });
+
+    }
+
+    window.addEventListener("scroll", updateActiveNav);
+
+    updateActiveNav();
+
+
+    /* =========================
+       SCROLL PROGRESS BAR
+    ========================= */
+
+    const progressBar = document.querySelector(".scroll-progress");
+
+    function updateScrollProgress() {
+
+        if (!progressBar) return;
+
+        const scrollTop = window.scrollY;
+
+        const documentHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+
+        let progress = 0;
+
+        if (documentHeight > 0) {
+            progress = (scrollTop / documentHeight) * 100;
+        }
+
+        progressBar.style.width = progress + "%";
+
+    }
+
+    window.addEventListener("scroll", updateScrollProgress);
+
+    updateScrollProgress();
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+
+        const revealObserver = new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        revealObserver.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.08
+            }
+        );
+
+
+        revealElements.forEach(function (element) {
+
+            revealObserver.observe(element);
+
+        });
+
+    } else {
+
+        revealElements.forEach(function (element) {
+
+            element.classList.add("visible");
+
         });
 
     }
@@ -51,18 +231,159 @@ document.addEventListener("DOMContentLoaded", () => {
        PHOTO MODAL
     ========================= */
 
+    const photoModal = document.getElementById("photoModal");
     const profileBtn = document.getElementById("profileBtn");
     const profileViewBtn = document.getElementById("profileViewBtn");
-    const photoModal = document.getElementById("photoModal");
     const photoClose = document.getElementById("photoClose");
 
     function openPhotoModal() {
+
         if (!photoModal) return;
 
-        photoModal.classList.add("show");
-        document.body.classList.add("modal-open");
+        photoModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+
     }
 
+
+    function closePhotoModal() {
+
+        if (!photoModal) return;
+
+        photoModal.classList.remove("active");
+        document.body.style.overflow = "";
+
+    }
+
+
+    if (profileBtn) {
+
+        profileBtn.addEventListener("click", openPhotoModal);
+
+    }
+
+
+    if (profileViewBtn) {
+
+        profileViewBtn.addEventListener("click", openPhotoModal);
+
+    }
+
+
+    if (photoClose) {
+
+        photoClose.addEventListener("click", closePhotoModal);
+
+    }
+
+
+    /* =========================
+       RESUME MODAL
+    ========================= */
+
+    const resumeBtn = document.getElementById("resumeBtn");
+    const resumeModal = document.getElementById("resumeModal");
+    const resumeClose = document.getElementById("resumeClose");
+
+    function openResumeModal() {
+
+        if (!resumeModal) return;
+
+        resumeModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeResumeModal() {
+
+        if (!resumeModal) return;
+
+        resumeModal.classList.remove("active");
+        document.body.style.overflow = "";
+
+    }
+
+
+    if (resumeBtn) {
+
+        resumeBtn.addEventListener("click", openResumeModal);
+
+    }
+
+
+    if (resumeClose) {
+
+        resumeClose.addEventListener("click", closeResumeModal);
+
+    }
+
+
+    /* =========================
+       MODAL BACKDROP CLICK
+    ========================= */
+
+    const modalBackdrops = document.querySelectorAll(".modal-backdrop");
+
+    modalBackdrops.forEach(function (backdrop) {
+
+        backdrop.addEventListener("click", function () {
+
+            if (photoModal) {
+                photoModal.classList.remove("active");
+            }
+
+            if (resumeModal) {
+                resumeModal.classList.remove("active");
+            }
+
+            document.body.style.overflow = "";
+
+        });
+
+    });
+
+
+    /* =========================
+       ESC KEY CLOSE MODALS
+    ========================= */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            if (photoModal) {
+                photoModal.classList.remove("active");
+            }
+
+            if (resumeModal) {
+                resumeModal.classList.remove("active");
+            }
+
+            document.body.style.overflow = "";
+
+        }
+
+    });
+
+
+    /* =========================
+       IMAGE ERROR HANDLING
+    ========================= */
+
+    const profileImage = document.querySelector(".profile-image");
+
+    if (profileImage) {
+
+        profileImage.addEventListener("error", function () {
+
+            console.log("Profile image could not be loaded: profile.jpg");
+
+        });
+
+    }
+
+});
     function closePhotoModal() {
         if (!photoModal) return;
 
