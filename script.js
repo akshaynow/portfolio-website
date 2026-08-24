@@ -1,112 +1,106 @@
-/* =========================
-   RUN AFTER PAGE READY
-========================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", function(){
+    /* =========================
+       LIGHT THEME DEFAULT
+    ========================= */
 
-/* =========================
-   DARK MODE DEFAULT (FIRST)
-========================= */
+    const toggle = document.getElementById("themeToggle");
 
-const toggle=document.getElementById("themeToggle");
+    // Always start with light mode
+    document.body.classList.remove("dark");
 
-if(localStorage.getItem("theme")==="light"){
-document.body.classList.remove("dark");
-}else{
-document.body.classList.add("dark");
-}
-
-if(toggle){
-toggle.onclick=()=>{
-document.body.classList.toggle("dark");
-localStorage.setItem(
-"theme",
-document.body.classList.contains("dark")?"dark":"light"
-);
-};
-}
+    if (toggle) {
+        toggle.addEventListener("click", function () {
+            document.body.classList.toggle("dark");
+        });
+    }
 
 
-/* =========================
-   ROLE ROTATION
-========================= */
+    /* =========================
+       PHOTO POPUP
+    ========================= */
 
-const roleText=document.querySelector(".role-text");
+    const profileBtn = document.getElementById("profileBtn");
+    const photoModal = document.getElementById("photoModal");
 
-if(roleText){
-const roles=[
-"IT Infrastructure Specialist",
-"Network Administrator",
-"System Support Engineer"
-];
+    if (profileBtn && photoModal) {
+        profileBtn.addEventListener("click", function () {
+            photoModal.classList.add("show");
+        });
 
-let i=0;
-
-setInterval(()=>{
-i=(i+1)%roles.length;
-roleText.textContent=roles[i];
-},2600);
-}
+        photoModal.addEventListener("click", function () {
+            photoModal.classList.remove("show");
+        });
+    }
 
 
-/* =========================
-   PHOTO POPUP
-========================= */
+    /* =========================
+       RESUME POPUP
+    ========================= */
 
-const profileBtn=document.getElementById("profileBtn");
-const photoModal=document.getElementById("photoModal");
+    const resumeBtn = document.getElementById("resumeBtn");
+    const resumeModal = document.getElementById("resumeModal");
 
-if(profileBtn && photoModal){
-profileBtn.onclick=()=>photoModal.classList.add("show");
-photoModal.onclick=()=>photoModal.classList.remove("show");
-}
+    if (resumeBtn && resumeModal) {
+        resumeBtn.addEventListener("click", function () {
+            resumeModal.classList.add("show");
+        });
 
-
-/* =========================
-   RESUME POPUP
-========================= */
-
-const resumeBtn=document.getElementById("resumeBtn");
-const resumeModal=document.getElementById("resumeModal");
-
-if(resumeBtn && resumeModal){
-resumeBtn.onclick=()=>resumeModal.classList.add("show");
-resumeModal.onclick=()=>resumeModal.classList.remove("show");
-}
+        resumeModal.addEventListener("click", function () {
+            resumeModal.classList.remove("show");
+        });
+    }
 
 
-/* =========================
-   SCROLL PROGRESS BAR
-========================= */
+    /* =========================
+       SCROLL PROGRESS BAR
+    ========================= */
 
-const progress=document.querySelector(".progress");
+    const progress = document.querySelector(".progress");
 
-window.addEventListener("scroll",()=>{
-if(!progress) return;
+    function updateProgress() {
+        if (!progress) return;
 
-const scrollTop=document.documentElement.scrollTop;
-const height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+        const scrollTop =
+            document.documentElement.scrollTop ||
+            document.body.scrollTop;
 
-progress.style.width=(scrollTop/height)*100+"%";
-});
+        const scrollHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+
+        if (scrollHeight > 0) {
+            progress.style.width =
+                (scrollTop / scrollHeight) * 100 + "%";
+        }
+    }
+
+    window.addEventListener("scroll", updateProgress);
+    updateProgress();
 
 
-/* =========================
-   REVEAL ANIMATION (FIXED)
-========================= */
+    /* =========================
+       REVEAL ANIMATION
+    ========================= */
 
-const reveals=document.querySelectorAll(".reveal");
+    const reveals = document.querySelectorAll(".reveal");
 
-function revealNow(){
-reveals.forEach(el=>{
-if(el.getBoundingClientRect().top < window.innerHeight-80){
-el.classList.add("visible");
-}
-});
-}
+    function revealNow() {
+        reveals.forEach(function (element) {
+            const position =
+                element.getBoundingClientRect().top;
 
-window.addEventListener("scroll",revealNow);
-revealNow(); // IMPORTANT: run once on page load
+            const screenHeight = window.innerHeight;
 
+            if (position < screenHeight - 80) {
+                element.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealNow);
+    window.addEventListener("resize", revealNow);
+
+    revealNow();
 
 });
