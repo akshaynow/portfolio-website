@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
         menuToggle.addEventListener("click", function () {
 
             navMenu.classList.toggle("open");
-            menuToggle.classList.toggle("active");
 
         });
 
@@ -86,60 +85,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     block: "start"
                 });
 
-                /* Close mobile menu */
-                if (navMenu && menuToggle) {
-                    navMenu.classList.remove("open");
-                    menuToggle.classList.remove("active");
-                }
+            }
 
+            /* Close mobile menu */
+
+            if (navMenu) {
+                navMenu.classList.remove("open");
             }
 
         });
 
     });
-
-
-    /* =========================
-       NAVIGATION ACTIVE LINK
-    ========================= */
-
-    const sections = document.querySelectorAll("main section[id]");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    function updateActiveNav() {
-
-        let currentSection = "";
-
-        sections.forEach(function (section) {
-
-            const sectionTop = section.offsetTop - 180;
-            const sectionHeight = section.offsetHeight;
-
-            if (
-                window.scrollY >= sectionTop &&
-                window.scrollY < sectionTop + sectionHeight
-            ) {
-                currentSection = section.getAttribute("id");
-            }
-
-        });
-
-        navLinks.forEach(function (link) {
-
-            link.classList.remove("active");
-
-            if (
-                link.getAttribute("href") === "#" + currentSection
-            ) {
-                link.classList.add("active");
-            }
-
-        });
-
-    }
-
-    window.addEventListener("scroll", updateActiveNav);
-    updateActiveNav();
 
 
     /* =========================
@@ -150,11 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateScrollProgress() {
 
-        if (!progressBar) return;
+        if (!progressBar) {
+            return;
+        }
 
-        const scrollTop =
-            window.scrollY ||
-            document.documentElement.scrollTop;
+        const scrollTop = window.scrollY;
 
         const scrollHeight =
             document.documentElement.scrollHeight -
@@ -171,7 +127,57 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addEventListener("scroll", updateScrollProgress);
+
     updateScrollProgress();
+
+
+    /* =========================
+       ACTIVE NAVIGATION
+    ========================= */
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    function updateActiveNavigation() {
+
+        let currentSection = "";
+
+        sections.forEach(function (section) {
+
+            const sectionTop = section.offsetTop - 180;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY < sectionTop + sectionHeight
+            ) {
+
+                currentSection = section.getAttribute("id");
+
+            }
+
+        });
+
+
+        navLinks.forEach(function (link) {
+
+            link.classList.remove("active");
+
+            if (
+                link.getAttribute("href") === "#" + currentSection
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    }
+
+    window.addEventListener("scroll", updateActiveNavigation);
+
+    updateActiveNavigation();
 
 
     /* =========================
@@ -183,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if ("IntersectionObserver" in window) {
 
         const revealObserver = new IntersectionObserver(
+
             function (entries) {
 
                 entries.forEach(function (entry) {
@@ -198,20 +205,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
             },
+
             {
-                threshold: 0.05,
-                rootMargin: "0px 0px -50px 0px"
+                threshold: 0.08,
+                rootMargin: "0px 0px -30px 0px"
             }
+
         );
 
+
         revealElements.forEach(function (element) {
+
             revealObserver.observe(element);
+
         });
 
     } else {
 
         revealElements.forEach(function (element) {
+
             element.classList.add("visible");
+
         });
 
     }
@@ -228,32 +242,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function openPhotoModal() {
 
-        if (!photoModal) return;
+        if (!photoModal) {
+            return;
+        }
 
         photoModal.classList.add("show");
+
         document.body.classList.add("modal-open");
 
     }
 
+
     function closePhotoModal() {
 
-        if (!photoModal) return;
+        if (!photoModal) {
+            return;
+        }
 
         photoModal.classList.remove("show");
+
         document.body.classList.remove("modal-open");
 
     }
 
+
     if (profileBtn) {
+
         profileBtn.addEventListener("click", openPhotoModal);
+
     }
+
 
     if (profileViewBtn) {
+
         profileViewBtn.addEventListener("click", openPhotoModal);
+
     }
 
+
     if (photoClose) {
+
         photoClose.addEventListener("click", closePhotoModal);
+
+    }
+
+
+    /* Photo backdrop */
+
+    if (photoModal) {
+
+        const photoBackdrop =
+            photoModal.querySelector(".modal-backdrop");
+
+        if (photoBackdrop) {
+
+            photoBackdrop.addEventListener(
+                "click",
+                closePhotoModal
+            );
+
+        }
+
     }
 
 
@@ -267,48 +316,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function openResumeModal() {
 
-        if (!resumeModal) return;
+        if (!resumeModal) {
+            return;
+        }
 
         resumeModal.classList.add("show");
+
         document.body.classList.add("modal-open");
 
     }
 
+
     function closeResumeModal() {
 
-        if (!resumeModal) return;
+        if (!resumeModal) {
+            return;
+        }
 
         resumeModal.classList.remove("show");
+
         document.body.classList.remove("modal-open");
 
     }
 
+
     if (resumeBtn) {
-        resumeBtn.addEventListener("click", openResumeModal);
+
+        resumeBtn.addEventListener(
+            "click",
+            openResumeModal
+        );
+
     }
+
 
     if (resumeClose) {
-        resumeClose.addEventListener("click", closeResumeModal);
-    }
 
-
-    /* =========================
-       MODAL BACKGROUND CLICK
-    ========================= */
-
-    if (photoModal) {
-
-        const photoBackdrop =
-            photoModal.querySelector(".modal-backdrop");
-
-        if (photoBackdrop) {
-            photoBackdrop.addEventListener(
-                "click",
-                closePhotoModal
-            );
-        }
+        resumeClose.addEventListener(
+            "click",
+            closeResumeModal
+        );
 
     }
+
+
+    /* Resume backdrop */
 
     if (resumeModal) {
 
@@ -316,10 +368,12 @@ document.addEventListener("DOMContentLoaded", function () {
             resumeModal.querySelector(".modal-backdrop");
 
         if (resumeBackdrop) {
+
             resumeBackdrop.addEventListener(
                 "click",
                 closeResumeModal
             );
+
         }
 
     }
@@ -329,35 +383,20 @@ document.addEventListener("DOMContentLoaded", function () {
        ESC KEY
     ========================= */
 
-    document.addEventListener("keydown", function (event) {
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-        if (event.key === "Escape") {
+            if (event.key === "Escape") {
 
-            closePhotoModal();
-            closeResumeModal();
+                closePhotoModal();
+
+                closeResumeModal();
+
+            }
 
         }
+    );
 
-    });
-
-
-    /* =========================
-       PROFILE IMAGE ERROR
-    ========================= */
-
-    const profileImage =
-        document.querySelector(".profile-image");
-
-    if (profileImage) {
-
-        profileImage.addEventListener("error", function () {
-
-            console.error(
-                "Profile image could not be loaded: profile.jpg"
-            );
-
-        });
-
-    }
 
 });
